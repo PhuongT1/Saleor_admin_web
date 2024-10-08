@@ -51,6 +51,7 @@ export enum AccountErrorCode {
   JWT_MISSING_TOKEN = 'JWT_MISSING_TOKEN',
   JWT_SIGNATURE_EXPIRED = 'JWT_SIGNATURE_EXPIRED',
   LEFT_NOT_MANAGEABLE_PERMISSION = 'LEFT_NOT_MANAGEABLE_PERMISSION',
+  LOGIN_ATTEMPT_DELAYED = 'LOGIN_ATTEMPT_DELAYED',
   MISSING_CHANNEL_SLUG = 'MISSING_CHANNEL_SLUG',
   NOT_FOUND = 'NOT_FOUND',
   OUT_OF_SCOPE_GROUP = 'OUT_OF_SCOPE_GROUP',
@@ -62,7 +63,8 @@ export enum AccountErrorCode {
   PASSWORD_TOO_SHORT = 'PASSWORD_TOO_SHORT',
   PASSWORD_TOO_SIMILAR = 'PASSWORD_TOO_SIMILAR',
   REQUIRED = 'REQUIRED',
-  UNIQUE = 'UNIQUE'
+  UNIQUE = 'UNIQUE',
+  UNKNOWN_IP_ADDRESS = 'UNKNOWN_IP_ADDRESS'
 }
 
 /** Fields required to update the user. */
@@ -134,6 +136,14 @@ export type AddressInput = {
   phone?: InputMaybe<Scalars['String']>;
   /** Postal code. */
   postalCode?: InputMaybe<Scalars['String']>;
+  /**
+   * Determine if the address should be validated. By default, Saleor accepts only address inputs matching ruleset from [Google Address Data]{https://chromium-i18n.appspot.com/ssl-address), using [i18naddress](https://github.com/mirumee/google-i18n-address) library. Some mutations may require additional permissions to use the the field. More info about permissions can be found in relevant mutation.
+   *
+   * Added in Saleor 3.19.
+   *
+   * Note: this API is currently in Feature Preview and can be subject to changes at later point.
+   */
+  skipValidation?: InputMaybe<Scalars['Boolean']>;
   /** Address. */
   streetAddress1?: InputMaybe<Scalars['String']>;
   /** Address. */
@@ -1218,7 +1228,7 @@ export enum CheckoutCreateFromOrderUnavailableVariantErrorCode {
 }
 
 export type CheckoutCreateInput = {
-  /** Billing address of the customer. */
+  /** Billing address of the customer. `skipValidation` requires HANDLE_CHECKOUTS and AUTHENTICATED_APP permissions. */
   billingAddress?: InputMaybe<AddressInput>;
   /** Slug of a channel in which to create a checkout. */
   channel?: InputMaybe<Scalars['String']>;
@@ -1228,7 +1238,7 @@ export type CheckoutCreateInput = {
   languageCode?: InputMaybe<LanguageCodeEnum>;
   /** A list of checkout lines, each containing information about an item in the checkout. */
   lines: Array<CheckoutLineInput>;
-  /** The mailing address to where the checkout will be shipped. Note: the address will be ignored if the checkout doesn't contain shippable items. */
+  /** The mailing address to where the checkout will be shipped. Note: the address will be ignored if the checkout doesn't contain shippable items. `skipValidation` requires HANDLE_CHECKOUTS and AUTHENTICATED_APP permissions. */
   shippingAddress?: InputMaybe<AddressInput>;
   /**
    * The checkout validation rules that can be changed.
@@ -4704,6 +4714,7 @@ export enum PaymentErrorCode {
   BALANCE_CHECK_ERROR = 'BALANCE_CHECK_ERROR',
   BILLING_ADDRESS_NOT_SET = 'BILLING_ADDRESS_NOT_SET',
   CHANNEL_INACTIVE = 'CHANNEL_INACTIVE',
+  CHECKOUT_COMPLETION_IN_PROGRESS = 'CHECKOUT_COMPLETION_IN_PROGRESS',
   CHECKOUT_EMAIL_NOT_SET = 'CHECKOUT_EMAIL_NOT_SET',
   GRAPHQL_ERROR = 'GRAPHQL_ERROR',
   INVALID = 'INVALID',
@@ -5980,13 +5991,9 @@ export type PromotionCreateInput = {
   /**
    * Defines the promotion type. Implicate the required promotion rules predicate type and whether the promotion rules will give the catalogue or order discount.
    *
-   * The default value is `Catalogue`.
-   *
-   * This field will be required from Saleor 3.20.
-   *
    * Added in Saleor 3.19.
    */
-  type?: InputMaybe<PromotionTypeEnum>;
+  type: PromotionTypeEnum;
 };
 
 /** An enumeration. */
@@ -7185,6 +7192,7 @@ export enum TransactionFlowStrategyEnum {
 
 /** An enumeration. */
 export enum TransactionInitializeErrorCode {
+  CHECKOUT_COMPLETION_IN_PROGRESS = 'CHECKOUT_COMPLETION_IN_PROGRESS',
   GRAPHQL_ERROR = 'GRAPHQL_ERROR',
   INVALID = 'INVALID',
   NOT_FOUND = 'NOT_FOUND',
@@ -7207,6 +7215,7 @@ export enum TransactionKind {
 
 /** An enumeration. */
 export enum TransactionProcessErrorCode {
+  CHECKOUT_COMPLETION_IN_PROGRESS = 'CHECKOUT_COMPLETION_IN_PROGRESS',
   GRAPHQL_ERROR = 'GRAPHQL_ERROR',
   INVALID = 'INVALID',
   MISSING_PAYMENT_APP = 'MISSING_PAYMENT_APP',
@@ -7692,7 +7701,7 @@ export type WebhookCreateInput = {
   /** The asynchronous events that webhook wants to subscribe. */
   asyncEvents?: InputMaybe<Array<WebhookEventTypeAsyncEnum>>;
   /**
-   * Custom headers, which will be added to HTTP request. There is a limitation of 5 headers per webhook and 998 characters per header.Only "X-*" and "Authorization*" keys are allowed.
+   * Custom headers, which will be added to HTTP request. There is a limitation of 5 headers per webhook and 998 characters per header.Only `X-*`, `Authorization*`, and `BrokerProperties` keys are allowed.
    *
    * Added in Saleor 3.12.
    *
@@ -8857,7 +8866,7 @@ export type WebhookUpdateInput = {
   /** The asynchronous events that webhook wants to subscribe. */
   asyncEvents?: InputMaybe<Array<WebhookEventTypeAsyncEnum>>;
   /**
-   * Custom headers, which will be added to HTTP request. There is a limitation of 5 headers per webhook and 998 characters per header.Only "X-*" and "Authorization*" keys are allowed.
+   * Custom headers, which will be added to HTTP request. There is a limitation of 5 headers per webhook and 998 characters per header.Only `X-*`, `Authorization*`, and `BrokerProperties` keys are allowed.
    *
    * Added in Saleor 3.12.
    *

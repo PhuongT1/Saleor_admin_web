@@ -22,7 +22,6 @@
 !.tx
 !.husky
 !.changeset
-!.knip.json
 *.log
 *.pyc
 *.mo

@@ -72,7 +72,7 @@ export default defineConfig(({ command, mode }) => {
       bundler: "vite",
     }),
     createHtmlPlugin({
-      entry: "/index.tsx",
+      entry: "index.tsx",
       template: "index.html",
       inject: {
         data: {
@@ -106,17 +106,17 @@ export default defineConfig(({ command, mode }) => {
     copyNoopSW(),
   ];
 
-  if (!isDev) {
-    console.log("Enabling service worker...");
+  // if (!isDev) {
+  //   console.log("Enabling service worker...");
 
-    plugins.push(
-      sentryVitePlugin({
-        authToken: SENTRY_AUTH_TOKEN,
-        org: SENTRY_ORG,
-        project: SENTRY_PROJECT,
-      }),
-    );
-  }
+  //   plugins.push(
+  //     sentryVitePlugin({
+  //       authToken: SENTRY_AUTH_TOKEN,
+  //       org: SENTRY_ORG,
+  //       project: SENTRY_PROJECT,
+  //     }),
+  //   );
+  // }
 
   const globals = {
     /*

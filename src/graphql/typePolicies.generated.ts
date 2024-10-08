@@ -3372,12 +3372,13 @@ export type OrderGrantedRefundLineFieldPolicy = {
 	quantity?: FieldPolicy<any> | FieldReadFunction<any>,
 	reason?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type OrderLineKeySpecifier = ('allocations' | 'digitalContentUrl' | 'id' | 'isGift' | 'isShippingRequired' | 'metadata' | 'metafield' | 'metafields' | 'privateMetadata' | 'privateMetafield' | 'privateMetafields' | 'productName' | 'productSku' | 'productVariantId' | 'quantity' | 'quantityFulfilled' | 'quantityToFulfill' | 'saleId' | 'taxClass' | 'taxClassMetadata' | 'taxClassName' | 'taxClassPrivateMetadata' | 'taxRate' | 'thumbnail' | 'totalPrice' | 'translatedProductName' | 'translatedVariantName' | 'undiscountedTotalPrice' | 'undiscountedUnitPrice' | 'unitDiscount' | 'unitDiscountReason' | 'unitDiscountType' | 'unitDiscountValue' | 'unitPrice' | 'variant' | 'variantName' | 'voucherCode' | OrderLineKeySpecifier)[];
+export type OrderLineKeySpecifier = ('allocations' | 'digitalContentUrl' | 'id' | 'isGift' | 'isPriceOverridden' | 'isShippingRequired' | 'metadata' | 'metafield' | 'metafields' | 'privateMetadata' | 'privateMetafield' | 'privateMetafields' | 'productName' | 'productSku' | 'productVariantId' | 'quantity' | 'quantityFulfilled' | 'quantityToFulfill' | 'saleId' | 'taxClass' | 'taxClassMetadata' | 'taxClassName' | 'taxClassPrivateMetadata' | 'taxRate' | 'thumbnail' | 'totalPrice' | 'translatedProductName' | 'translatedVariantName' | 'undiscountedTotalPrice' | 'undiscountedUnitPrice' | 'unitDiscount' | 'unitDiscountReason' | 'unitDiscountType' | 'unitDiscountValue' | 'unitPrice' | 'variant' | 'variantName' | 'voucherCode' | OrderLineKeySpecifier)[];
 export type OrderLineFieldPolicy = {
 	allocations?: FieldPolicy<any> | FieldReadFunction<any>,
 	digitalContentUrl?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	isGift?: FieldPolicy<any> | FieldReadFunction<any>,
+	isPriceOverridden?: FieldPolicy<any> | FieldReadFunction<any>,
 	isShippingRequired?: FieldPolicy<any> | FieldReadFunction<any>,
 	metadata?: FieldPolicy<any> | FieldReadFunction<any>,
 	metafield?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -6726,7 +6727,7 @@ export type VoucherUpdatedFieldPolicy = {
 	version?: FieldPolicy<any> | FieldReadFunction<any>,
 	voucher?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type WarehouseKeySpecifier = ('address' | 'clickAndCollectOption' | 'companyName' | 'email' | 'externalReference' | 'id' | 'isPrivate' | 'metadata' | 'metafield' | 'metafields' | 'name' | 'privateMetadata' | 'privateMetafield' | 'privateMetafields' | 'shippingZones' | 'slug' | WarehouseKeySpecifier)[];
+export type WarehouseKeySpecifier = ('address' | 'clickAndCollectOption' | 'companyName' | 'email' | 'externalReference' | 'id' | 'isPrivate' | 'metadata' | 'metafield' | 'metafields' | 'name' | 'privateMetadata' | 'privateMetafield' | 'privateMetafields' | 'shippingZones' | 'slug' | 'stocks' | WarehouseKeySpecifier)[];
 export type WarehouseFieldPolicy = {
 	address?: FieldPolicy<any> | FieldReadFunction<any>,
 	clickAndCollectOption?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -6743,7 +6744,8 @@ export type WarehouseFieldPolicy = {
 	privateMetafield?: FieldPolicy<any> | FieldReadFunction<any>,
 	privateMetafields?: FieldPolicy<any> | FieldReadFunction<any>,
 	shippingZones?: FieldPolicy<any> | FieldReadFunction<any>,
-	slug?: FieldPolicy<any> | FieldReadFunction<any>
+	slug?: FieldPolicy<any> | FieldReadFunction<any>,
+	stocks?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type WarehouseCountableConnectionKeySpecifier = ('edges' | 'pageInfo' | 'totalCount' | WarehouseCountableConnectionKeySpecifier)[];
 export type WarehouseCountableConnectionFieldPolicy = {
