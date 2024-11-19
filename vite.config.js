@@ -14,10 +14,7 @@ const copyNoopSW = () => ({
   apply: "build",
   writeBundle: () => {
     mkdirSync(path.resolve("build", "dashboard"), { recursive: true });
-    copyFileSync(
-      path.resolve("assets", "sw.js"),
-      path.resolve("build", "dashboard", "sw.js"),
-    );
+    copyFileSync(path.resolve("assets", "sw.js"), path.resolve("build", "dashboard", "sw.js"));
   },
 });
 
@@ -26,10 +23,7 @@ const copyOgImage = () => ({
   apply: "build",
   writeBundle: () => {
     mkdirSync(path.resolve("build", "dashboard"), { recursive: true });
-    copyFileSync(
-      path.resolve("assets", "og.png"),
-      path.resolve("build", "dashboard", "og.png"),
-    );
+    copyFileSync(path.resolve("assets", "og.png"), path.resolve("build", "dashboard", "og.png"));
   },
 });
 
@@ -78,7 +72,7 @@ export default defineConfig(({ command, mode }) => {
       bundler: "vite",
     }),
     createHtmlPlugin({
-      entry: path.resolve(__dirname, "src", "index.tsx"),
+      entry: "/index.tsx",
       template: "index.html",
       inject: {
         data: {
@@ -221,10 +215,7 @@ export default defineConfig(({ command, mode }) => {
           Vite resolves it by using jsnext:main https://github.com/moment/moment/blob/develop/package.json#L26.
           We enforce to use a different path, ignoring jsnext:main field.
         */
-        moment: path.resolve(
-          __dirname,
-          "./node_modules/moment/min/moment-with-locales.js",
-        ),
+        moment: path.resolve(__dirname, "./node_modules/moment/min/moment-with-locales.js"),
       },
     },
     plugins,
