@@ -67,12 +67,25 @@ class ClientEditorCore implements EditorCore {
             Table: "Bảng",
             Link: "Liên kết",
             Marker: "Đánh dấu",
+            Color: "Màu chữ",
             Bold: "Đậm",
             Italic: "Nghiêng",
             InlineCode: "Mã trong dòng",
-            Image: "Hình ảnh", // Dịch tên công cụ Image nếu cần
+            Image: "Hình ảnh",
+            Underline: "Gạch dưới chữ",
+            "Font Size": "Kích thước chữ",
+            Strikethrough: "Gạch giữa",
+            Style: "Tạo kiểu cho chữ",
           },
           tools: {
+            header: {
+              "Heading 1": "Tiêu đề 1",
+              "Heading 2": "Tiêu đề 2",
+              "Heading 3": "Tiêu đề 3",
+              "Heading 4": "Tiêu đề 4",
+              "Heading 5": "Tiêu đề 5",
+              "Heading 6": "Tiêu đề 6",
+            },
             warning: {
               Title: "Tiêu đề",
               Message: "Thông báo",
